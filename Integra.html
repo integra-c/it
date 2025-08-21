@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT-Интеграция - продажа оборудования и ремонт техники</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базовые стили и сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #6C757D;
+            --secondary: #495057;
+            --accent: #ADB5BD;
+            --light: #F8F9FA;
+            --dark: #343A40;
+            --gray: #6C757D;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка и навигация */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Герой секция */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('i7.jpg'); /* Ваше изображение */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #9fa6ad;
+        }
+        
+        /* О компании */
+        .about {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            color: var(--dark);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 350px; /* Фиксированная высота для контейнера */
+            background-color: #f0f0f0; /* Цвет фона, если изображение не загрузится */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Оборудование */
+        .equipment {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .equipment-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .equipment-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .equipment-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .equipment-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Услуги */
+        .services {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Программное обеспечение */
+        .software {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .software-item {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: var(--light);
+            transition: all 0.3s;
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .software-item:hover {
+            background-color: #e9ecef;
+            transform: translateY(-5px);
+        }
+        
+        .software-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        /* Контакты */
+        .contact {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 20px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-column p, 
+        .footer-column a {
+            color: #cbd5e1;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #5a5a5a;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #5a5a5a;
+            color: #a0a0a0;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero {
+                padding: 130px 0 80px;
+            }
+            
+            .about, .equipment, .services, .software, .contact {
+                padding: 80px 0;
+            }
+            
+            .about-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">IT-Интеграция</a>
+                <ul class="nav-links">
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#equipment">Оборудование</a></li>
+                    <li><a href="#services">Ремонт</a></li>
+                    <li><a href="#software">ПО</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="container">
+            <h1>Комплексное IT-оснащение для бизнеса</h1>
+            <p>Профессиональные решения для корпоративных клиентов: продажа оборудования, серверов, оргтехники и IT-аутсорсинг</p>
+            <div>
+                <a href="#equipment" class="btn">Каталог оборудования</a>
+                <a href="#contact" class="btn btn-accent">Получить консультацию</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">О компании</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>IT-Интеграция - надежный партнер для вашего бизнеса</h3>
+                    <p>Мы специализируемся на комплексном оснащении предприятий современным IT-оборудованием. Наша миссия - предоставить бизнесу все необходимое для эффективной работы в цифровую эпоху.</p>
+                    <p>С 2010 года мы оснастили более 500 компаний в Иркутске и области. Наш подход сочетает в себе глубокое понимание бизнес-задач, техническую экспертизу и индивидуальный подход к каждому клиенту.</p>
+                    <p>Мы предлагаем не просто оборудование, а комплексные решения, которые включают подбор техники, поставку, настройку, обслуживание и IT-поддержку.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Замените этот текст на ваше изображение -->
+                    <img src="i7.jpg" alt="Процессор Intel Core i7">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Оборудование -->
+    <section id="equipment" class="equipment">
+        <div class="container">
+            <h2 class="section-title">Продажа оборудования для бизнеса</h2>
+            <div class="equipment-grid">
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Серверное оборудование</h3>
+                    <p>Полный комплекс серверных решений для бизнеса любого масштаба. Серверы, системы хранения данных, сетевое оборудование.</p>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Компьютерная техника</h3>
+                    <p>Стационарные компьютеры, моноблоки, тонкие клиенты и рабочие станции для решения любых бизнес-задач.</p>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Ноутбуки и мобильные решения</h3>
+                    <p>Бизнес-ноутбуки, планшеты и мобильные рабочие места для современных сотрудников.</p>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3>Оргтехника</h3>
+                    <p>Принтеры, МФУ, сканеры и копиры от ведущих мировых производителей для офиса любого размера.</p>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Сетевое оборудование</h3>
+                    <p>Коммутаторы, маршрутизаторы, точки доступа и системы бесперебойного питания для надежной инфраструктуры.</p>
+                </div>
+                <div class="equipment-card">
+                    <div class="equipment-icon">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <h3>Системы хранения данных</h3>
+                    <p>NAS, SAN-системы и решения для резервного копирования корпоративных данных.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Ремонт и обслуживание</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Ремонт компьютеров</h3>
+                    <p>Диагностика и ремонт стационарных компьютеров любой сложности. Замена комплектующих, чистка от пыли, сборка системных блоков.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Ремонт ноутбуков</h3>
+                    <p>Чиним ноутбуки всех производителей. Замена матриц, клавиатур, ремонт разъемов, чистка систем охлаждения, замена термопасты.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Восстановление данных</h3>
+                    <p>Вернем ваши важные файлы с поврежденных жестких дисков, SSD, флешек и карт памяти. Работаем даже в сложных случаях.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Апгрейд и модернизация</h3>
+                    <p>Улучшим производительность вашего компьютера. Подберем совместимые комплектующие и установим их.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Удаление вирусов</h3>
+                    <p>Очистим систему от вредоносных программ, настроим защиту и восстановим работоспособность Windows.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Техническое обслуживание</h3>
+                    <p>Регулярное обслуживание компьютеров для бизнеса. Чистка, профилактика, обновление программного обеспечения.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Программное обеспечение -->
+    <section id="software" class="software">
+        <div class="container">
+            <h2 class="section-title">Лицензионное программное обеспечение</h2>
+            <div class="software-grid">
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fab fa-windows"></i>
+                    </div>
+                    <h3>Операционные системы</h3>
+                    <p>Лицензионные версии Windows 10/11 для дома и бизнеса, серверные ОС</p>
+                </div>
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Антивирусы</h3>
+                    <p>Лицензии Касперского, ESET, Dr.Web и других антивирусов</p>
+                </div>
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                    <h3>Графика и дизайн</h3>
+                    <p>Adobe Photoshop, Illustrator, CorelDraw и другие программы</p>
+                </div>
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Серверное ПО</h3>
+                    <p>Программное обеспечение для серверов и IT-инфраструктуры</p>
+                </div>
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>СУБД</h3>
+                    <p>Системы управления базами данных для бизнес-приложений</p>
+                </div>
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Инструменты разработки</h3>
+                    <p>Профессиональные среды разработки и инструменты для программистов</p>
+                </div>
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Облачные решения</h3>
+                    <p>Лицензии для облачных сервисов и платформ для удаленной работы</p>
+                </div>
+                <div class="software-item">
+                    <div class="software-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Бизнес-аналитика</h3>
+                    <p>Программы для анализа данных, отчетности и бизнес-планирования</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Свяжитесь с нами</h3>
+                    <p>Получите бесплатную консультацию по подбору оборудования для вашего бизнеса. Работаем с корпоративными клиентами по всему региону.</p>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> г. Иркутск, ул. Советская 124Е, офис 007</p>
+                        <p><i class="fas fa-map-marker-alt"></i> г. Иркутск, ул. Советская 124Е, офис 008</p>
+                        <p><i class="fas fa-phone"></i> 8 (902) 515-55-58</p>
+                        <p><i class="fas fa-phone"></i> 8 (3952) 65-55-58</p>
+                        <p><i class="fas fa-envelope"></i> 38it@mail.ru</p>
+                        <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 - 18:00, Сб: 10:00 - 16:00</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="feedbackForm">
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="tel" placeholder="Ваш телефон" required>
+                        <input type="email" placeholder="Ваш email">
+                        <textarea placeholder="Опишите ваши потребности в оборудовании" required></textarea>
+                        <button type="submit" class="btn">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>IT-Интеграция</h3>
+                    <p>Комплексное оснащение предприятий IT-оборудованием, серверами, оргтехникой и профессиональный ремонт.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Оборудование</h3>
+                    <a href="#">Серверы</a>
+                    <a href="#">Компьютеры</a>
+                    <a href="#">Ноутбуки</a>
+                    <a href="#">Оргтехника</a>
+                    <a href="#">Сетевое оборудование</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <a href="#">Ремонт компьютеров</a>
+                    <a href="#">Ремонт ноутбуков</a>
+                    <a href="#">Обслуживание</a>
+                    <a href="#">Установка ПО</a>
+                    <a href="#">IT-аутсорсинг</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p>г. Иркутск, ул. Советская 124Е, офис 007</p>
+                    <p>г. Иркутск, ул. Советская 124Е, офис 008</p>
+                    <p>8 (902) 515-55-58</p>
+                    <p>8 (3952) 65-55-58</p>
+                    <p>38it@mail.ru</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 IT-Интеграция. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Обработка формы обратной связи
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за вашу заявку! Наш менеджер свяжется с вами в ближайшее время для обсуждения ваших потребностей в оборудовании.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
